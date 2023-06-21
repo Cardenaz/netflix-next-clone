@@ -1,6 +1,9 @@
+import { SetStateAction, useState } from "react";
 import Input from "./Input";
 
 const Auth = () => {
+
+    const [email, setEmail] = useState(''); 
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
 
@@ -16,7 +19,7 @@ const Auth = () => {
                         <h2 className="text-white text-4xl mb-8 font-semibold">Sign In</h2>
 
                         <div className="flex flex-col gap-4"> 
-                        <Input />
+                        <Input id={"email"} onChange={(ev: { target: { value: SetStateAction<string>; }; })=> setEmail(ev.target.value)} value={email} label={"Email"} type={"email"} />
 
                         </div>
                     </div>
