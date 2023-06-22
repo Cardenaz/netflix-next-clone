@@ -13,6 +13,11 @@ const Auth = () => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login')
     }, [])
 
+
+    const variantIsLogin = () => {
+        return variant === 'login'; 
+    }
+
  
 
 
@@ -32,11 +37,12 @@ const Auth = () => {
 
                         <div className="flex flex-col gap-4"> 
 
+                        {variant === 'register' && 
                         <Input id={"username"} onChange={(ev: { 
                             target: { value: SetStateAction<string>; }; })=> setUserName(ev.target.value)}
                          value={userName} label={"Username"} type={"username"} />
 
-
+                        }
                         <Input id={"email"} onChange={(ev: { 
                             target: { value: SetStateAction<string>; }; })=> setEmail(ev.target.value)}
                          value={email} label={"Email"} type={"email"} />
@@ -49,10 +55,10 @@ const Auth = () => {
 
                         <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700
                         transition
-                        ">Login</button>
-                        <p className="text-neutral-500 mt-12">First time using Netflix?
+                        ">{variantIsLogin() ? 'Login' : 'Sign Up'}</button>
+                        <p className="text-neutral-500 mt-12"> {variantIsLogin() ? 'First time using Netflix?' : "Already have an account?" }
 
-                        <span onClick={toggleVariant} className="text-white ml-1 hover-underline cursor-pointer">Create account </span>
+                        <span onClick={toggleVariant} className="text-white ml-1 hover-underline cursor-pointer"> {variantIsLogin() ? 'Create account' : 'Sign In'} </span>
                         
                         </p>
 
