@@ -47,9 +47,15 @@ src="/images/logo.png" alt="logo"/>
  <BsChevronDown className="text-white"/>
  <MobileMenu visible={showMobileMenu}/>
 
-
  </div>
+<div className="flex flexrow ml-auto gap-7 items-center"> 
 
+    <div className="text-gray-200 hover:text-gray-300 cursor-pointer"> 
+        Search
+    </div>
+
+
+</div>
 
 
         </div>
