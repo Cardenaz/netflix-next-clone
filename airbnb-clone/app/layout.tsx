@@ -20,7 +20,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientOnly > 
-          <Modal isOpen={false} onClose={() => { } } onSubmit={() => { } } actionLabel={''}/>   
+          <Modal isOpen title='Login' actionLabel='Submit'
+        />   
         <Navbar/>
         </ClientOnly>
         {children} 
