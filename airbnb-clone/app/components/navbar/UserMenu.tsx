@@ -29,7 +29,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             return loginModal.onOpen(); 
         }
 
-        // 
+    
     }, [currentUser, loginModal])
 
     return (
@@ -37,7 +37,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
             <div className="flex flex-row items-center gap-3"> 
 
-            <div onClick={()=>{}} className="
+            <div onClick={onRent} className="
             hidden 
             md:block 
             text-sm 
