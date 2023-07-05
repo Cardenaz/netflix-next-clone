@@ -17,10 +17,12 @@ import Heading from '../Heading';
 import Input from '../inputs/Input';
 import { toast } from 'react-hot-toast';
 import Button from '../Button';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 const RegisterModal = () => {
 
     const registerModal = useRegisterModal(); 
+    const loginModal = useLoginModal(); 
     const [isLoading, setIsLoading] = useState(false); 
 
     const {
@@ -39,7 +41,6 @@ const RegisterModal = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true); 
-
         axios.post('/api/register', data).then(() => {registerModal.onClose()})
         .catch((error) => {
             console.log(error); 
@@ -49,6 +50,14 @@ const RegisterModal = () => {
         }); 
      
     }
+
+    const toggle = useCallback(() => {
+
+        registerModal.onClose();
+        loginModal.onOpen();  
+
+
+    }, [loginModal, registerModal]); 
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -120,7 +129,7 @@ onClick={()=>{}}
 <div> 
 Already Have an account? 
 </div>
-<div onClick={registerModal.onClose}
+<div onClick={toggle}
 className='text-neutral-800 cursor-pointer hover:underline'> 
 Log in
 </div>
