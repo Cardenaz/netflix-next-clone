@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 import React from "react";
+import Categories from "./Categories";
 
 interface UserProp {
     id: string
@@ -43,6 +44,9 @@ const Navbar: React.FC<NavbarProps> = ({
         
         
         </div>
+
+
+        <Categories/>
 
 
 
