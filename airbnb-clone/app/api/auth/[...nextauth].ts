@@ -3,7 +3,7 @@ import { AuthOptions } from "next-auth";
 import GithubProvider from 'next-auth/providers/github'; 
 import GoogleProvider from 'next-auth/providers/google'; 
 
-import prisma from "../libs/prismadb"; 
+import prisma from "../../libs/prismadb"; 
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import bcrypt from 'bcrypt'; 
@@ -31,7 +31,9 @@ import NextAuth from "next-auth/next";
 
             }, 
             async authorize(credentials) {
+                console.log("Running the authorize function")
                 if(!credentials?.email || !credentials?.password) {
+                    console.log("failing at the first entry")
                     throw new Error('Invalid credentials'); 
                 }
 
@@ -40,6 +42,7 @@ import NextAuth from "next-auth/next";
                 }); 
 
                 if(!user || !user?.hashedPassword) {
+                    console.log("failing at the second level")
                     throw new Error("Invalid credentials"); 
                 }
 
@@ -49,6 +52,8 @@ import NextAuth from "next-auth/next";
                 )
 
                 if(!isCorrectPassword) {
+                    console.log("failing at the hashing level")
+
                     throw new Error('invalid credentials'); 
                 }
 
