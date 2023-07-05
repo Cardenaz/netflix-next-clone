@@ -1,5 +1,7 @@
+'use client'; 
 import { categories } from "@/app/shared/domain/categories";
 import Container from "../Container"
+
 import CategoryBox from "../CategoryBox";
 import { usePathname, useSearchParams } from "next/navigation";
 
