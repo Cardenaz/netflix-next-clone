@@ -19,7 +19,7 @@ const Search = () => {
         <div className="flex flex-row items-center justify-between"> 
 
 
-        <div className="text-sm font-semibold px-6"> 
+        <div className="text-sm font-semibold px-6 py-3"> 
 
         Anywhere
         
