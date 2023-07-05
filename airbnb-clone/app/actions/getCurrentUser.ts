@@ -1,14 +1,12 @@
 import { getServerSession } from "next-auth";
-
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from '@/app/libs/prismadb'; 
-import { User } from "../domain/entities/user";
 
 export async function getSession() {
     return getServerSession(authOptions)
 }
 
-export default async function getCurrentUser(): Promise<User | null | undefined>  {
+export default async function getCurrentUser() {
     try {
         const session = await getSession(); 
 
@@ -22,7 +20,15 @@ export default async function getCurrentUser(): Promise<User | null | undefined
             }
         }); 
 
-        if(currentUser) {return new User(currentUser.id, currentUser.email!, currentUser.name!)}
+        if(currentUser) {
+
+            return {...currentUser, 
+
+                createdAt: currentUser.createdAt.toISOString(), 
+                updatedAt: currentUser.updatedAt.toISOString(), 
+                emailVerified: currentUser.emailVerified?.toISOString() ||  null
+                }        
+        }
         
         else {
             return null; 

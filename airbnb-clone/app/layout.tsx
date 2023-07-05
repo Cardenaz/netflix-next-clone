@@ -6,6 +6,7 @@ import {Nunito } from 'next/font/google'
 import ToasterProvider from './providers/ToasterProvider'
 import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/getCurrentUser'
+import { User } from './domain/entities/user'
 
 
 export const metadata = {
@@ -30,7 +31,7 @@ export default async function RootLayout({
           <ToasterProvider />
         <RegisterModal />  
         <LoginModal />
-        <Navbar currentUser={currentUser? currentUser : undefined}/>
+        <Navbar currentUser={currentUser? {name: currentUser.name!, email: currentUser.email!, id: currentUser.id!} : null}/>
         </ClientOnly>
         {children}  
         </body>

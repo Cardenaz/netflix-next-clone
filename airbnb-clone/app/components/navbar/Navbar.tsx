@@ -6,8 +6,17 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 import React from "react";
 
+interface UserProp {
+    id: string
+    name: string, 
+    email: string, 
+
+
+
+}
+
 interface NavbarProps {
-    currentUser?: User
+    currentUser?: UserProp | null
 
 }
 
