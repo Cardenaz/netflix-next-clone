@@ -10,6 +10,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import Map from "../Map";
 import dynamic from "next/dynamic";
+import InfoBody from "./rentModal/InfoBody";
 
 enum STEPS {
     CATEGORY = 0 , 
@@ -43,6 +44,7 @@ const RentModal = () => {
 
 const category = watch('category'); 
 const location = watch('location');
+const guestCount = watch('guestCount'); 
 
 const Map = useMemo(() => dynamic(() => import('../Map'), {
     ssr: false
@@ -134,6 +136,13 @@ const setCustomValue = (id: string, value: any) => {
             </div>
 
         )
+    }
+
+    if(step === STEPS.INFO) {
+        bodyContent = <InfoBody
+        guestCount={guestCount}
+        setCustomValue={setCustomValue}
+        />; 
     }
 
 
