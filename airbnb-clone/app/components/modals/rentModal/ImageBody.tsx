@@ -1,5 +1,6 @@
 'use client';
 import Heading from "../../Heading";
+import ImageUpload from "../../inputs/ImageUpload";
 
  
 
@@ -14,6 +15,8 @@ const ImageBody = () => {
         subtitle="Show guests what your place looks like!"
         
         />
+
+        <ImageUpload />
 
 
 
