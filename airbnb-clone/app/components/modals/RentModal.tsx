@@ -11,6 +11,7 @@ import CountrySelect from "../inputs/CountrySelect";
 import Map from "../Map";
 import dynamic from "next/dynamic";
 import InfoBody from "./rentModal/InfoBody";
+import ImageBody from "./rentModal/ImageBody";
 
 enum STEPS {
     CATEGORY = 0 , 
@@ -45,6 +46,8 @@ const RentModal = () => {
 const category = watch('category'); 
 const location = watch('location');
 const guestCount = watch('guestCount'); 
+const roomCount = watch('roomCount'); 
+const bathroomCount = watch('bathroomCount'); 
 
 const Map = useMemo(() => dynamic(() => import('../Map'), {
     ssr: false
@@ -141,8 +144,14 @@ const setCustomValue = (id: string, value: any) => {
     if(step === STEPS.INFO) {
         bodyContent = <InfoBody
         guestCount={guestCount}
+        roomCount={roomCount} 
+        bathroomCount={bathroomCount}
         setCustomValue={setCustomValue}
         />; 
+    }
+
+    if(step === STEPS.IMAGES) {
+        bodyContent = <ImageBody />
     }
 
 

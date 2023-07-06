@@ -5,11 +5,15 @@ import Counter from './Counter';
  
 interface InfoBodyProps {
     guestCount: number, 
+    roomCount: number, 
+    bathroomCount: number, 
     setCustomValue: (id: string, value: any) => void
 }
 
 const InfoBody: React.FC<InfoBodyProps> = ({
     guestCount, 
+    roomCount, 
+    bathroomCount, 
     setCustomValue
 }) => {
     return (<div className="flex flex-col gap-8">
@@ -33,6 +37,32 @@ const InfoBody: React.FC<InfoBodyProps> = ({
 
         
         />
+
+        <hr />
+          <Counter 
+
+                title="Rooms"
+                subtitle="How many rooms do you have?" 
+                value={roomCount} 
+                onChange={(value) => setCustomValue('roomCount', value)}
+
+                    
+
+
+/>  
+<hr />
+
+            <Counter 
+
+            title="Bathrooms"
+            subtitle="How many bathrooms do you have?" 
+            value={bathroomCount} 
+            onChange={(value) => setCustomValue('bathroomCount', value)}
+
+                
+
+
+            />
 
 
 
