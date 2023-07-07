@@ -12,6 +12,7 @@ import Map from "../Map";
 import dynamic from "next/dynamic";
 import InfoBody from "./rentModal/InfoBody";
 import ImageBody from "./rentModal/ImageBody";
+import DescriptionBody from "./rentModal/DescriptionBody";
 
 enum STEPS {
     CATEGORY = 0 , 
@@ -25,6 +26,8 @@ enum STEPS {
 const RentModal = () => {
     const rentModal = useRentModal(); 
     const [step, setSteps] = useState(STEPS.CATEGORY); 
+
+    const [isLoading, setIsLoading] = useState(false); 
 
     const {register, handleSubmit, setValue, watch, formState: {
         errors
@@ -152,6 +155,14 @@ const setCustomValue = (id: string, value: any) => {
 
     if(step === STEPS.IMAGES) {
         bodyContent = <ImageBody />
+    }
+
+    if(step === STEPS.DESCRIPTION) {
+        bodyContent = <DescriptionBody 
+        isLoading={isLoading}
+        register={register}
+        errors={errors}
+        />; 
     }
 
 
