@@ -16,7 +16,8 @@ interface BodyProps {
     category: any, 
     location: any, 
     infoBody: InfoBodyProps
-    descriptionBody: DescriptionBodyProps
+    descriptionBody: DescriptionBodyProps, 
+    imageSrc: any
 }
 
 
@@ -27,7 +28,8 @@ const Body: React.FC<BodyProps> = ({
     category, 
     location, 
     infoBody, 
-    descriptionBody
+    descriptionBody, 
+    imageSrc
 }) => {
 
     switch (step) {
@@ -59,6 +61,8 @@ const Body: React.FC<BodyProps> = ({
 
         case STEPS.IMAGES: 
         return <ImageBody 
+        setCustomValue={setCustomValue}
+        imageSrc={imageSrc}
         
         />
 

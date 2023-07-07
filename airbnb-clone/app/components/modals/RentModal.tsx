@@ -55,6 +55,7 @@ const location = watch('location');
 const guestCount = watch('guestCount'); 
 const roomCount = watch('roomCount'); 
 const bathroomCount = watch('bathroomCount'); 
+const imageSrc = watch('imageSrc'); 
 
 const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -128,6 +129,8 @@ const setCustomValue = (id: string, value: any) => {
         location={location}
         infoBody={{guestCount: guestCount, bathroomCount: bathroomCount, roomCount:roomCount, setCustomValue: setCustomValue}}
         descriptionBody={{isLoading:isLoading, register:register, errors:errors}}
+        imageSrc={imageSrc}
+
         
         
         />}
