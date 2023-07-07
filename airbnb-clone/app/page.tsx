@@ -1,12 +1,13 @@
+import getListings from "./actions/getListings";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
+import ListingCard from "./components/listings/ListingCard";
 
-export default function Home() {
+export default async function Home() {
+  const listings = await getListings(); 
 
-  const isEmpty = true; 
-
-  if (isEmpty) {
+  if (listings.length === 0) {
     return (
       <ClientOnly>
         <EmptyState  showReset/> 
@@ -33,9 +34,22 @@ export default function Home() {
         "
         
         >
-          <div>My future listings</div>
+          <div>{listings.map((listing:any) => {
+            return (
+              
+              <ListingCard 
 
+              key={listing.id}
+            
+              
+              />
+              
+       
+            )
 
+          })}</div>
+
+ 
         </div>
         
         </Container>
