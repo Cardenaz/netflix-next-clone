@@ -4,6 +4,9 @@ import { STEPS } from "../RentModal";
 import CategoryBody from "./CategoryBody";
 import LocationBody from "./LocationBody";
 import InfoBody, { InfoBodyProps } from "./InfoBody";
+import ImageBody from "./ImageBody";
+import DescriptionBody, { DescriptionBodyProps } from "./DescriptionBody";
+import PriceBody from "./PriceBody";
 
  
 
@@ -13,6 +16,7 @@ interface BodyProps {
     category: any, 
     location: any, 
     infoBody: InfoBodyProps
+    descriptionBody: DescriptionBodyProps
 }
 
 
@@ -22,7 +26,8 @@ const Body: React.FC<BodyProps> = ({
     setCustomValue, 
     category, 
     location, 
-    infoBody
+    infoBody, 
+    descriptionBody
 }) => {
 
     switch (step) {
@@ -49,6 +54,27 @@ const Body: React.FC<BodyProps> = ({
         roomCount={infoBody.roomCount} 
         bathroomCount={infoBody.bathroomCount}
         setCustomValue={setCustomValue}
+        
+        />
+
+        case STEPS.IMAGES: 
+        return <ImageBody 
+        
+        />
+
+        case STEPS.DESCRIPTION: 
+        return <DescriptionBody 
+        isLoading={descriptionBody.isLoading}
+        register={descriptionBody.register}
+        errors={descriptionBody.errors}
+        />
+
+        case STEPS.PRICE: 
+        return <PriceBody
+
+        isLoading={descriptionBody.isLoading}
+        register={descriptionBody.register}
+        errors={descriptionBody.errors}
         
         />
     

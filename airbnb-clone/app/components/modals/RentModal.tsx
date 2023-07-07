@@ -56,11 +56,6 @@ const guestCount = watch('guestCount');
 const roomCount = watch('roomCount'); 
 const bathroomCount = watch('bathroomCount'); 
 
-const Map = useMemo(() => dynamic(() => import('../Map'), {
-    ssr: false
-}), [location])
-
-
 const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
         shouldDirty: true, 
@@ -116,69 +111,6 @@ const setCustomValue = (id: string, value: any) => {
 
     }, [step]); 
 
-    let bodyContent = ( <CategoryBody 
-
-        setCustomValue={setCustomValue}
-        category={category}
-    
-    />
-      
-    )
-
-    if(step === STEPS.LOCATION) {
-        bodyContent = (
-            <div className="flex flex-col gap-8"> 
-                <Heading title="Where is your place located?" subtitle="Help guests find you!"/>
-
-
-                <CountrySelect 
-                value={location}
-                onChange={(value) => setCustomValue('location', value)}
-                
-                
-                />
-
-               <Map center={location?.latlng}/>
-           
-           
-           
-           
-           
-            </div>
-
-        )
-    }
-
-    if(step === STEPS.INFO) {
-        bodyContent = <InfoBody
-        guestCount={guestCount}
-        roomCount={roomCount} 
-        bathroomCount={bathroomCount}
-        setCustomValue={setCustomValue}
-        />; 
-    }
-
-    if(step === STEPS.IMAGES) {
-        bodyContent = <ImageBody />
-    }
-
-    if(step === STEPS.DESCRIPTION) {
-        bodyContent = <DescriptionBody 
-        isLoading={isLoading}
-        register={register}
-        errors={errors}
-        />; 
-    }
-
-    if(step === STEPS.PRICE) {
-        bodyContent = <PriceBody 
-        isLoading={isLoading}
-        register={register}
-        errors={errors}
-        />
-    }
-
-
 
     return (
         <Modal 
@@ -189,15 +121,16 @@ const setCustomValue = (id: string, value: any) => {
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
         title="Airbnb your home"
-        body=<Body 
+        body={<Body 
         step={step} 
         setCustomValue={setCustomValue} 
         category={category}
         location={location}
         infoBody={{guestCount: guestCount, bathroomCount: bathroomCount, roomCount:roomCount, setCustomValue: setCustomValue}}
+        descriptionBody={{isLoading:isLoading, register:register, errors:errors}}
         
         
-        />
+        />}
         
         /> 
     )

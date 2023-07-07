@@ -4,7 +4,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import Heading from "../../Heading";
 import Input from "../../inputs/Input";
 
-interface DescriptionBodyProps {
+export interface DescriptionBodyProps {
     isLoading: boolean, 
     register: UseFormRegister<FieldValues>
     errors: FieldErrors<FieldValues>
