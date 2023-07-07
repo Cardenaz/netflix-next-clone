@@ -1,0 +1,47 @@
+'use client';
+import React, { useMemo } from "react";
+import Heading from "../../Heading";
+import CountrySelect from "../../inputs/CountrySelect";
+import dynamic from "next/dynamic";
+
+
+interface LocationBodyProps {
+    location: any, 
+    setCustomValue: (id: string, value: any) => void
+}
+ 
+
+
+const LocationBody: React.FC<LocationBodyProps> = ({
+    location, 
+    setCustomValue
+}) => {
+    const Map = useMemo(() => dynamic(() => import('../../Map'), {
+        ssr: false
+    }), [location])
+    
+    return (
+        <div className="flex flex-col gap-8"> 
+            <Heading title="Where is your place located?" subtitle="Help guests find you!"/>
+
+
+            <CountrySelect 
+            value={location}
+            onChange={(value) => setCustomValue('location', value)}
+            
+            
+            />
+
+           <Map center={location?.latlng}/>
+       
+       
+       
+       
+       
+        </div>
+
+    )
+
+}
+
+export default LocationBody

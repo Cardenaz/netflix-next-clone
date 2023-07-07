@@ -17,6 +17,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import CategoryBody from "./rentModal/CategoryBody";
+import Body from "./rentModal/Body";
 
 export enum STEPS { 
     CATEGORY = 0 , 
@@ -188,7 +189,15 @@ const setCustomValue = (id: string, value: any) => {
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
         title="Airbnb your home"
-        body={bodyContent}
+        body=<Body 
+        step={step} 
+        setCustomValue={setCustomValue} 
+        category={category}
+        location={location}
+        infoBody={{guestCount: guestCount, bathroomCount: bathroomCount, roomCount:roomCount, setCustomValue: setCustomValue}}
+        
+        
+        />
         
         /> 
     )

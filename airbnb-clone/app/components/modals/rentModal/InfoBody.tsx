@@ -3,7 +3,7 @@ import React from "react";
 import Heading from "../../Heading";
 import Counter from './Counter'; 
  
-interface InfoBodyProps {
+export interface InfoBodyProps {
     guestCount: number, 
     roomCount: number, 
     bathroomCount: number, 
