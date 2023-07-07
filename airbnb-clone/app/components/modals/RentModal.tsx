@@ -6,15 +6,19 @@ import { useMemo, useState } from "react";
 import Heading from "../Heading";
 import { categories } from "@/app/shared/domain/categories";
 import CategoryInput from "../inputs/CategoryInput";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
-import Map from "../Map";
 import dynamic from "next/dynamic";
 import InfoBody from "./rentModal/InfoBody";
 import ImageBody from "./rentModal/ImageBody";
 import DescriptionBody from "./rentModal/DescriptionBody";
+import PriceBody from "./rentModal/PriceBody";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import CategoryBody from "./rentModal/CategoryBody";
 
-enum STEPS {
+export enum STEPS { 
     CATEGORY = 0 , 
     LOCATION = 1, 
     INFO = 2,
@@ -24,11 +28,10 @@ enum STEPS {
 }
 
 const RentModal = () => {
+    const router = useRouter(); 
     const rentModal = useRentModal(); 
     const [step, setSteps] = useState(STEPS.CATEGORY); 
-
     const [isLoading, setIsLoading] = useState(false); 
-
     const {register, handleSubmit, setValue, watch, formState: {
         errors
     }, 
@@ -73,6 +76,26 @@ const setCustomValue = (id: string, value: any) => {
         setSteps((value) => value +1); 
     }
 
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        if(step !== STEPS.PRICE) {
+            return onNext(); 
+        }
+
+        setIsLoading(true); 
+
+        axios.post('/api/listings', data).then(() => {
+            toast.success('Listing Created!')
+            router.refresh(); 
+            reset
+            setSteps(STEPS.CATEGORY); 
+            rentModal.onClose(); 
+        }).catch(() => {
+            toast.error('Something went wrong')
+        }).finally(() => {
+            setIsLoading(false); 
+        }); 
+    }
+
     const actionLabel = useMemo(() => {
 
         if(step === STEPS.PRICE) {
@@ -88,36 +111,17 @@ const setCustomValue = (id: string, value: any) => {
         if (step === STEPS.CATEGORY) {
             return undefined; 
         }
-        return 'BACK'; 
+        return 'Back'; 
 
     }, [step]); 
 
-    let bodyContent = (
-        <div className="flex flex-col gap-8">
-<Heading  title="Which of these best describes your place?"
-        subtitle="Pick a category"
-/>            
+    let bodyContent = ( <CategoryBody 
 
-<div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
- 
-    {categories.map((item) => {
-        return <div key={item.label} className="col-span-1"> 
-
-        <CategoryInput 
-        onClick={(category)=> setCustomValue('category', category)}
-        selected={category === item.label}
-        label={item.label}
-        icon={item.icon}
-        
-        />
-        
-       
-             </div>
-    })}
+        setCustomValue={setCustomValue}
+        category={category}
     
-    
-     </div>
-             </div>
+    />
+      
     )
 
     if(step === STEPS.LOCATION) {
@@ -165,12 +169,21 @@ const setCustomValue = (id: string, value: any) => {
         />; 
     }
 
+    if(step === STEPS.PRICE) {
+        bodyContent = <PriceBody 
+        isLoading={isLoading}
+        register={register}
+        errors={errors}
+        />
+    }
+
+
 
     return (
         <Modal 
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}
-        onSubmit={onNext}
+        onSubmit={handleSubmit(onSubmit)}
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
