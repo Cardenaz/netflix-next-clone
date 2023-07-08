@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Futurama from './components/Futurama';
+import AboutUs from './components/AboutUs';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
 
        <Futurama />
-        
+        <AboutUs />
         
         {children}</body>
     </html>
