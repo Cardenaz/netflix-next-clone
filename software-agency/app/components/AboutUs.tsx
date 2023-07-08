@@ -1,4 +1,5 @@
 import React from "react";
+import Member from "./Member";
 
 const AboutUs: React.FC = () => {
 
@@ -17,15 +18,46 @@ const AboutUs: React.FC = () => {
             <h2>Our Team</h2>
             <div className="mt-2">the &ldquo;spec-ops&rdquo;</div>
             <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4-xl xl:grid-cols-5 gap-6 lg:gap-20">
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
+                <Member 
+                id="william"
+                name="William"
+                socialId="@cardenas"
+                link="https://github.com/cardenaz"
+                />
+                    <Member 
+                id="milk"
+                name="Hank"
+                socialId="@rearden"
+                link="https://github.com/cardenaz"
+                />
+                    <Member 
+                id="air"
+                name="Howard"
+                socialId="@cardenas"
+                link="https://github.com/cardenaz"
+                />
+                    <Member 
+                id="dominique"
+                name="Dagny"
+                socialId="@cardenas"
+                link="https://github.com/cardenaz"
+                />
+                    <Member 
+                id="michelle"
+                name="Michelle"
+                socialId="@cardenas"
+                link="https://github.com/cardenaz"
+                />
+                    <Member 
+                id="dominique"
+                name="Dominique"
+                socialId="@cardenas"
+                link="https://github.com/cardenaz"
+                />
+              
             </div>
         </div>
-         </section>)
+    </section>)
 
 }
 
