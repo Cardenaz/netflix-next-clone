@@ -8,6 +8,7 @@ import {format} from 'date-fns'
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+import { UserProp } from "../navbar/Navbar";
 
 interface ListingCardProps {
     data: Listing
@@ -16,7 +17,7 @@ interface ListingCardProps {
     disabled?: boolean, 
     actionLabel?: string, 
     actionId?: string, 
-    currentUser?: User
+    currentUser?: UserProp | null
 
 
 }

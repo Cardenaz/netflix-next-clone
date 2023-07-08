@@ -4,6 +4,7 @@ import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
+import { User } from "./domain/entities/user";
 
 export default async function Home() {
   const listings = await getListings(); 
@@ -43,6 +44,7 @@ export default async function Home() {
 
               key={listing.id}
               data={listing}
+              currentUser={currentUser? {name: currentUser.name!, email: currentUser.email!, id: currentUser.id!, favoriteIds: currentUser.favoriteIds} : null}
 
             
               

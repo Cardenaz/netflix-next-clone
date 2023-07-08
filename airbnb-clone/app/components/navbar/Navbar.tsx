@@ -7,10 +7,11 @@ import UserMenu from "./UserMenu";
 import React from "react";
 import Categories from "./Categories";
 
-interface UserProp {
+export interface UserProp {
     id: string
     name: string, 
     email: string, 
+    favoriteIds: string[]
 
 
 
