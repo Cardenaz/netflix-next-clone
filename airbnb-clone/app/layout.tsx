@@ -8,6 +8,8 @@ import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/getCurrentUser'
 import { User } from './domain/entities/user'
 import RentModal from './components/modals/RentModal'
+import { TbMapPinCancel } from 'react-icons/tb'
+import ShowMapButton from './components/ShowMapButton'
 
 
 export const metadata = {
@@ -35,8 +37,11 @@ export default async function RootLayout({
         <LoginModal />
         <Navbar currentUser={currentUser? {name: currentUser.name!, email: currentUser.email!, id: currentUser.id!, favoriteIds: currentUser.favoriteIds} : null}/>
         </ClientOnly>
-        <div className='pb-20 pt-28'> {children}  </div>
-   
+  {/*  <div className='pb-20 pt-28'> {children}  </div> */}
+    <div className='min-h-screen flex flex-col items-center justify-center'> 
+    <ShowMapButton actionLabel='Show map'/>
+     </div>
+  
         </body>
     </html>
   )
