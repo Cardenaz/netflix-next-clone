@@ -8,7 +8,7 @@ const app = express();
 
 const server = app.listen(PORT, async () => {
     await connectToDatabase(); 
-    console.log(`Server listening at http://localhost:${PORT}`); 
+    logger.info(`Server listening at http://localhost:${PORT}`); 
 
 }); 
 

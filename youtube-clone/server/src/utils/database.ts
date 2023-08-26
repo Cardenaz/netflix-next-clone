@@ -1,7 +1,11 @@
 import mongoose from 'mongoose'; 
 import logger from './logger';
 
-const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/youtube-clone'; 
+import dotenv from 'dotenv'; 
+
+dotenv.config(); 
+
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "";  
 
 
 export async function connectToDatabase() {
