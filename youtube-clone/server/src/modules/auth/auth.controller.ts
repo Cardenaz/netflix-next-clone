@@ -1,0 +1,32 @@
+import {Request, Response} from 'express'
+import { findUserByEmail } from '../user/user.service';
+import { StatusCodes } from 'http-status-codes';
+import { signJwt } from './auth.utils';
+
+export async function loginHandler (req: Request, res: Response) {
+
+    const {email, password} = req.body; 
+
+    const user = await findUserByEmail(email); 
+
+    if(!user || !user.comparePassword(password)) {
+        return res.status(StatusCodes.UNAUTHORIZED).send("invalid email or password"); 
+    }
+
+    const payload = user.toJSON(); 
+
+    const jwt = signJwt(payload); 
+
+    res.cookie("accessToken", jwt, {
+        maxAge:3.154e10, 
+        httpOnly: true, 
+        domain: 'localhost', 
+        path: '/', 
+        sameSite: 'strict', 
+        secure: false, 
+    }); 
+
+    return res.status(StatusCodes.UNAUTHORIZED).send("invalid email or password"); 
+
+    
+}
