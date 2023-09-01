@@ -1,9 +1,13 @@
-/*function omit<T>(obj: T, property: keyof T | (keyof T)[]) {
+function omit<T>(obj: T, property: keyof T | (keyof T)[]) {
 
     if(Array.isArray(property)) {
-        const entries = Object.entries(obj).filter(item => {
-            const [] = item; 
-        })
+        const entries = Object.entries(obj as any).filter(item => {
+            const [key] = item; 
+
+            return !property.includes(key as keyof T); 
+        }); 
+
+        return Object.fromEntries(entries); 
     }
 
 
@@ -13,4 +17,4 @@
 
 }
 
-export default omit; */
+export default omit; 
