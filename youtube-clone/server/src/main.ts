@@ -22,7 +22,7 @@ app.use(cors({
 
 app.use(helmet()); 
 
-app.use('/api/users', userRoute); 
+app.use("/api/users", userRoute); 
 app.use("api/auth", authRoute); 
 
 const server = app.listen(PORT, async () => {
