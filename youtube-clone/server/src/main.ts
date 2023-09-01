@@ -6,6 +6,7 @@ import { connectToDatabase, disconnectFromDatabase } from './utils/database';
 import helmet from 'helmet';
 import userRoute from './modules/user/user.route'; 
 import authRoute from './modules/auth/auth.route'; 
+import deseralizeUser from './middleware/deseralizeUser';
 
 const PORT = process.env.PORT || 4000; 
 
@@ -21,6 +22,7 @@ app.use(cors({
 }))
 
 app.use(helmet()); 
+app.use(deseralizeUser); 
 
 app.use("/api/users", userRoute); 
 app.use("api/auth", authRoute); 
